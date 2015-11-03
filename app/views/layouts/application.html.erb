@@ -10,12 +10,18 @@
 <nav class = "navbar">
   <div class = "container">
     <div class = "navbar-header">
-      <%= link_to "Cheng Wiki", root_url %>
+     
+      <li><%= link_to "Cheng Wiki", root_url %></li>
+      <li><%= link_to "Wikis", wikis_path %></li>
     </div>
     <div id = "navbar" class = "navbar-collapse collpase">
       <div class="pull-right user-info">
        <% if current_user %>
-        Hello <%= current_user.name %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        Hello <%= link_to (current_user.name || current_user.email), current_user %>!
+       <%= link_to edit_user_registration_path do %>
+        <span class = "glyphicon glyphicon-user"></span>
+       <% end %>
+       <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
        <% else %>
        <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %>     
        <% end %>

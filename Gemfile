@@ -36,6 +36,13 @@ gem 'spring',        group: :development
 gem 'figaro'
 # Gem used to seed database
 gem 'faker'
+# Gem used to declare roles
+gem 'pundit'
+# Gem used to make payments
+gem 'stripe'
+# Gem used for pagination
+ gem 'will_paginate', '~> 3.0.5'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
