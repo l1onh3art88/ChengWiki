@@ -16,8 +16,8 @@ class ChargesController < ApplicationController
    )
  
     flash[:notice] = "#{current_user.name}, You have now upgraded your account!"
-    current_user.role == "premium"
-   redirect_to user_path(current_user) # or wherever
+    current_user.update_attribute :role, "premium"
+    redirect_to user_path(current_user) # or wherever
  
  # Stripe will send back CardErrors, with friendly messages
  # when something goes wrong.
@@ -25,6 +25,7 @@ class ChargesController < ApplicationController
  rescue Stripe::CardError => e
    flash[:error] = e.message
    redirect_to new_charge_path
+    
     
   end
   

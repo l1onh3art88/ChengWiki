@@ -1,11 +1,12 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.visible_to(current_user).paginate(page: params[:page], per_page: 10)
+    @wikis = Wiki.visible_to(current_user.admin? || current_user.premium?).paginate(page: params[:page], per_page: 10)
     authorize @wikis
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
@@ -33,7 +34,7 @@ class WikisController < ApplicationController
   def update 
     @wiki = Wiki.find(params[:id])
     authorize @wiki
-    if @wiki.update_attributes(params.require(:wiki).permit(:title, :body))
+    if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :private))
        flash[:notice] = "Wiki was updated."
        redirect_to @wiki
     else
@@ -52,4 +53,6 @@ class WikisController < ApplicationController
        render :show
      end
   end
+  
+  
 end

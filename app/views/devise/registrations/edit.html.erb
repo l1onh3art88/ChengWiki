@@ -32,6 +32,12 @@
   </div>
 <% end %>
 
+<% if current_user.premium? %>
+<h2><%= button_to "Downgrade to Standard Membership", root_path, data: {confirm: "Are you sure? Once you have degraded, you will have to pay again to upgrade and all wikis that were made private will become public."}%></h2>
+<% else %>
+<h2><%= button_to "Upgrade to Premium Membership", charges_path, data: { confirm: "Are you sure?"} %></h2>
+
+<% end %>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 

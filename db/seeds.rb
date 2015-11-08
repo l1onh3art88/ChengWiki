@@ -12,7 +12,7 @@
    Wiki.create!(
      title:  Faker::Lorem.sentence,
      body:   Faker::Lorem.paragraph,
-     private: true
+     private: false
    )
  end
  wikis = Wiki.all
